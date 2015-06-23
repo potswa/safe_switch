@@ -1,0 +1,43 @@
+// begin_safe_switch: Put the brakes on "break;" breakage, with scoped convenience macros.
+// Copyright 2015 by David Krauss.
+// This source is released under the MIT license, http://opensource.org/licenses/MIT
+
+#ifndef INCLUDED_SSTAR_SAFE_SWITCH_MACROS_HPP
+#   error Please add #include "safe_switch_macros.hpp" at the top.
+#endif
+
+#if ! SSTAR_SAFE_SWITCH_MACRO_SCOPE_0 && ! SSTAR_SAFE_SWITCH_MACRO_SCOPE_1 \
+    && ! SSTAR_SAFE_SWITCH_MACRO_SCOPE_2 && ! SSTAR_SAFE_SWITCH_MACRO_SCOPE_3
+#   define SWITCH SSTAR_SAFE_SWITCH
+#   define CASE SSTAR_SAFE_SWITCH_CASE
+#   define DEFAULT SSTAR_SAFE_SWITCH_DEFAULT
+#   define SWITCH_VALUE SSTAR_SAFE_SWITCH_VALUE
+#endif
+
+#if SSTAR_SAFE_SWITCH_MACRO_SCOPE_0
+#undef SSTAR_SAFE_SWITCH_MACRO_SCOPE_0
+
+#if SSTAR_SAFE_SWITCH_MACRO_SCOPE_1
+#undef SSTAR_SAFE_SWITCH_MACRO_SCOPE_1
+
+#if SSTAR_SAFE_SWITCH_MACRO_SCOPE_2
+#undef SSTAR_SAFE_SWITCH_MACRO_SCOPE_2
+
+#if SSTAR_SAFE_SWITCH_MACRO_SCOPE_3
+#error "begin_safe_switch" only supports 16 nesting levels.
+
+#else
+#define SSTAR_SAFE_SWITCH_MACRO_SCOPE_3 1
+#endif
+
+#else
+#define SSTAR_SAFE_SWITCH_MACRO_SCOPE_2 1
+#endif
+
+#else
+#define SSTAR_SAFE_SWITCH_MACRO_SCOPE_1 1
+#endif
+
+#else
+#define SSTAR_SAFE_SWITCH_MACRO_SCOPE_0 1
+#endif

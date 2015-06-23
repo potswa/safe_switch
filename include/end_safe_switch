@@ -1,0 +1,39 @@
+// end_safe_switch: Put the brakes on "break;" breakage, with scoped convenience macros.
+// Copyright 2015 by David Krauss.
+// This source is released under the MIT license, http://opensource.org/licenses/MIT
+
+#if ! SSTAR_SAFE_SWITCH_MACRO_SCOPE_0
+#define SSTAR_SAFE_SWITCH_MACRO_SCOPE_0 1
+
+#if ! SSTAR_SAFE_SWITCH_MACRO_SCOPE_1
+#define SSTAR_SAFE_SWITCH_MACRO_SCOPE_1 1
+
+#if ! SSTAR_SAFE_SWITCH_MACRO_SCOPE_2
+#define SSTAR_SAFE_SWITCH_MACRO_SCOPE_2 1
+
+#if ! SSTAR_SAFE_SWITCH_MACRO_SCOPE_3
+#error unbalanced "end_safe_switch".
+
+#else
+#undef SSTAR_SAFE_SWITCH_MACRO_SCOPE_3
+#endif
+
+#else
+#undef SSTAR_SAFE_SWITCH_MACRO_SCOPE_2
+#endif
+
+#else
+#undef SSTAR_SAFE_SWITCH_MACRO_SCOPE_1
+#endif
+
+#else
+#undef SSTAR_SAFE_SWITCH_MACRO_SCOPE_0
+#endif
+
+#if ! SSTAR_SAFE_SWITCH_MACRO_SCOPE_0 && ! SSTAR_SAFE_SWITCH_MACRO_SCOPE_1 \
+    && ! SSTAR_SAFE_SWITCH_MACRO_SCOPE_2 && ! SSTAR_SAFE_SWITCH_MACRO_SCOPE_3
+#   undef SWITCH
+#   undef CASE
+#   undef DEFAULT
+#   undef SWITCH_VALUE
+#endif
