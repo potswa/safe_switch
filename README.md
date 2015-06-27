@@ -48,6 +48,19 @@ With this utility it would be written like this:
         baz();
     }
 
+Or this (having enabled the macros):
+
+    SWITCH ( condition )
+    CASE ( A ) {
+        foo();
+    }
+    CASE ({ B, C }) {
+        bar();
+    }
+    DEFAULT {
+        baz();
+    }
+
 
 Usage
 =====
@@ -169,7 +182,7 @@ mapping the macro names:
     DEFAULT => SSTAR_SAFE_SWITCH_DEFAULT
     SWITCH_VALUE => SSTAR_SAFE_SWITCH_VALUE
 
-The "scope" created by ``#include "begin_safe_switch"`` should be terminated by ``#include "end_safe_switch"`.
+The "scope" created by ``#include "begin_safe_switch"`` should be terminated by `#include "end_safe_switch"`.
 At the end of the outermost scope, the short macro names will be `#undef`ed.
 
 These scopes may nest, but the nesting levels are limited to 16 deep. This can be extended if you file a bug report.
@@ -204,7 +217,7 @@ FAQ
 
 Good question. Writing `if ( var == 5 )` is hardly error-prone. Some folks see `switch`…`case`…`break` as superior due to
 less repetition. (Ironically, this argument tends to forget about `break`.)
-If you disagree with that, then this utility isn't for you.
+If you already eschew `switch` and have no problem with `if`…`else`, then maybe this utility isn't for you.
 
 This utility ensures that the condition variable and the comparison are specified at a single point, so they can be adjusted
 without running through all the `if` statements. It's more handy when the comparison is more complicated than `==`.
