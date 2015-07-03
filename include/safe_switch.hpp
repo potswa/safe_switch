@@ -40,18 +40,18 @@ public:
    
     template< typename rhs >
     bool operator () ( rhs const & r ) const
-        { return { c( get_value(), r ) }; }
+        { return bool{ c( get_value(), r ) }; }
     
     template< typename rhs >
     bool operator () ( std::initializer_list< rhs > il ) const {
         for ( auto && r : il ) {
-            if ( c( get_value(), r ) ) return true;
+            if ( bool{ c( get_value(), r ) } ) return true;
         }
         return false;
     }
     bool operator () ( std::initializer_list< typename std::decay< operand >::type > il ) const {
         for ( auto && r : il ) {
-            if ( c( get_value(), r ) ) return true;
+            if ( bool{ c( get_value(), r ) } ) return true;
         }
         return false;
     }
